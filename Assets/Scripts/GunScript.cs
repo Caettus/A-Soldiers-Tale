@@ -11,15 +11,19 @@ public class GunScript : MonoBehaviour
     [SerializeField] GameObject hitEffect;
 
 
+    [SerializeField]float fireRate = 1f;
+    private float nextFireTime = 0f;
+    
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
         {
+            nextFireTime = Time.time + 1f / fireRate;
             Shoot();
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         PlayMuzzleFlash();
         ProcessRaycast();

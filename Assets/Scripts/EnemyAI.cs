@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour
     // Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
+    [SerializeField] EnemyGunScript enemyGun;
     
     // States
     public float sightRange, attackRange;
@@ -27,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        enemyGun = GetComponent<EnemyGunScript>();
     }
     void Update()
     {
@@ -98,8 +100,8 @@ public class EnemyAI : MonoBehaviour
         
         if (!alreadyAttacked)
         {
-            // Attack code here
-            Debug.Log("Attack");
+            enemyGun.Fire();
+            
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }

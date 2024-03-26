@@ -22,7 +22,7 @@ public class Objective : MonoBehaviour
         objSFX.Play();
         theObjective.SetActive(true);
         theObjective.GetComponent<Animation>().Play("ObjectiveDisplayAnim");
-        theText.GetComponent<Text>().text = "Objective: Capture the enemy's trench";
+        theText.GetComponent<Text>().text = "Objective: Defend the captured trench!";
         yield return new WaitForSeconds(5.3f);
         theText.GetComponent<Text>().text = "";
         theTrigger.SetActive(false);

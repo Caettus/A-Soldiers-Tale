@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2287888794360901923}
   - component: {fileID: 4802244020300846024}
-  - component: {fileID: -893388913957707487}
   - component: {fileID: 5915354577194346231}
   - component: {fileID: 4779644312939853752}
   m_Layer: 6
@@ -50,26 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
---- !u!114 &-893388913957707487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5545013655902559240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188660d8eb3d689468367dda90028c57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  walksSpeed: 5
-  runSpeed: 10
-  jumpPower: 7
-  gravity: 10
-  lookSpeed: 2
-  lookXLimit: 45
-  canMove: 1
 --- !u!114 &5915354577194346231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +64,7 @@ MonoBehaviour:
   playerCamera: {fileID: 2187117590357444831}
   walksSpeed: 5
   runSpeed: 10
-  jumpPower: 5
+  jumpPower: 10
   gravity: 15
   lookSpeed: 2
   lookXLimit: 45
@@ -198,6 +177,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2287888794360901923}
     m_Modifications:
+    - target: {fileID: 2895907546987703590, guid: 02dbd69b1f83c40a49cc67cbb42848ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.59
+      objectReference: {fileID: 0}
     - target: {fileID: 5570124367229068519, guid: 02dbd69b1f83c40a49cc67cbb42848ff,
         type: 3}
       propertyPath: m_LocalPosition.x

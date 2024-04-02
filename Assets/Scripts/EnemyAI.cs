@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        enemyGun = GetComponent<EnemyGunScript>();
+        enemyGun = GetComponentInChildren<EnemyGunScript>();
     }
     void Update()
     {

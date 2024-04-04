@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadePrefab: {fileID: 2933678870579778444, guid: 6f53aca51b69f7045ba6eda3b54d8a52,
     type: 3}
-  throwForce: 50
+  throwForce: 10
   cooldownTime: 2
 --- !u!1001 &4214458304880740398
 PrefabInstance:

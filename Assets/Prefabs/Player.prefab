@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4802244020300846024}
   - component: {fileID: 5915354577194346231}
   - component: {fileID: 4779644312939853752}
+  - component: {fileID: 7247223231594209262}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -95,6 +96,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7247223231594209262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5545013655902559240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccbe6bfabd4ac4458899d8e08fe3a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grenadePrefab: {fileID: 2933678870579778444, guid: 6f53aca51b69f7045ba6eda3b54d8a52,
+    type: 3}
+  throwForce: 50
+  cooldownTime: 2
 --- !u!1001 &4214458304880740398
 PrefabInstance:
   m_ObjectHideFlags: 0

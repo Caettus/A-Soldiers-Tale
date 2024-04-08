@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] float health = 100f;
+    [SerializeField] public float health = 100f;
 
     public void TakeDamage(float damage)
     {

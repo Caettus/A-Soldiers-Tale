@@ -13,9 +13,9 @@ public class CameraShake : MonoBehaviour {
             transform.localPosition = new Vector3(x, y, originalPos.z);
 
             elapsed += Time.deltaTime;
-            yield return null; // Wait until next frame to continue
+            yield return null; 
         }
 
-        transform.localPosition = originalPos; // Reset position after shaking
+        transform.localPosition = originalPos; 
     }
 }

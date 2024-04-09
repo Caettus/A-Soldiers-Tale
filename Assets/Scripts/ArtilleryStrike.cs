@@ -2,12 +2,14 @@ using System.Collections;
 using UnityEngine;
 
 public class ArtilleryStrike : MonoBehaviour {
-    public GameObject indicatorPrefab; // Assign in inspector
-    public GameObject explosionPrefab; // Assign in inspector
-    public BoxCollider strikeArea; // Assign in inspector
+    public GameObject indicatorPrefab; 
+    public GameObject explosionPrefab; 
+    public BoxCollider strikeArea; 
     public float minTimeBetweenStrikes = 5f;
     public float maxTimeBetweenStrikes = 10f;
     public float explosionRadius = 5f;
+    public CameraShake cameraShake; 
+    [SerializeField] private float shakeRadius = 20f;
 
     void Start() {
         StartCoroutine(ArtilleryStrikeRoutine());
@@ -43,8 +45,18 @@ public class ArtilleryStrike : MonoBehaviour {
     void TriggerExplosion(Vector3 position) {
         GameObject explosionEffect = Instantiate(explosionPrefab, position, Quaternion.identity);
         Destroy(explosionEffect, 5); 
-
         
+        // Camera shake
+        float distanceToCamera = Vector3.Distance(Camera.main.transform.position, position);
+
+        if (distanceToCamera <= shakeRadius) {
+           
+            float shakeDuration = 0.5f; 
+            float shakeMagnitude = 0.2f; 
+            StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
+        }
+        
+        // Damage players in the area
         Collider[] hitColliders = Physics.OverlapSphere(position, explosionRadius);
         foreach (var hitCollider in hitColliders) {
             if (hitCollider.CompareTag("Player")) {

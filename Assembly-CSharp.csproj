@@ -61,21 +61,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\MapDesignAssest\Fillefranz\Tools\Tools\Parabola.cs" />
     <Compile Include="Assets\Scripts\GrenadeThrowScript.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\MapDesignAssest\Fillefranz\Tools\Tools\Helper.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\MapDesignAssest\Fillefranz\Tools\Tools\DataTypes.cs" />
     <Compile Include="Assets\Objective System\Scripts\Objective System\Objective.cs" />
     <Compile Include="Assets\Scripts\Grenade.cs" />
     <Compile Include="Assets\Scripts\GunScript.cs" />
     <Compile Include="Assets\Scripts\EnemyGunScript.cs" />
+    <Compile Include="Assets\MapDesignAssest\Laterns and candles\scripts\ExtendedFlycam.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\MapDesignAssest\Fillefranz\PropMaker\Scripts\Ladder.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\Objective System\Scripts\GunAim.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
     <Compile Include="Assets\Objective System\Scripts\CamScript\Camswitchscript.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+    <Compile Include="Assets\MapDesignAssest\Laterns and candles\scripts\CameraFacing.cs" />
     <Compile Include="Assets\Objective System\Scripts\Objective System\Objective1.cs" />
+    <Compile Include="Assets\MapDesignAssest\Fillefranz\Tools\Tools\ExtensionMethods.cs" />
+    <Compile Include="Assets\MapDesignAssest\Fillefranz\PropMaker\Scripts\Prop.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Scripts\FPSController.cs" />
   </ItemGroup>
@@ -93,6 +101,7 @@
     <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Particle Add A8.shader" />
+    <None Include="Assets\MapDesignAssest\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Smoke Scroll.shader" />
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Particle Multiply A8.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
@@ -105,6 +114,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\MapDesignAssest\World War 1 Pack\Read me.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Particle AddSoft A8.shader" />
     <None Include="Assets\JMO Assets\WarFX\!WarFX Readme.txt" />

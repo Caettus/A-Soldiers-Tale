@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c8b48-7947-4fed-adb5-0d7a8d23dad1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/ArtilleryManager.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/ArtilleryManager.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/ArtilleryStrikeArea.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/ArtilleryStrikeArea.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ArtilleryStrike.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ArtilleryStrike.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmokeGround Big Alt.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Explosions/WFX_ExplosiveSmokeGround Big Alt.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade AlphaBlend Black.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade AlphaBlend Black.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade AlphaBlend Gray.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade AlphaBlend Gray.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade Black.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade Black.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade Gray.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade Gray.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade White.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JMO Assets/WarFX/_Effects/Smoke/WFX_SmokeGrenade White.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +16,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraShakeScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemyGunScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerHealth.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -117,7 +101,7 @@
       <workItem from="1711367381120" duration="32000" />
       <workItem from="1711367805644" duration="2603000" />
       <workItem from="1711444794894" duration="12273000" />
-      <workItem from="1712565428184" duration="2294000" />
+      <workItem from="1712565428184" duration="3698000" />
     </task>
     <servers />
   </component>

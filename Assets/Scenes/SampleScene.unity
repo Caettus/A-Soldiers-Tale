@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1277,6 +1277,18 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 226590400}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &897249266 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4564995813647600333, guid: 8dc9736e573d6214ca7bfdcb1049551c,
+    type: 3}
+  m_PrefabInstance: {fileID: 226590400}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bcb8b1e0bf71458683b57753f39f4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &931872756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3191,6 +3203,11 @@ PrefabInstance:
       objectReference: {fileID: 54521134}
     - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
         type: 3}
+      propertyPath: cameraShake
+      value: 
+      objectReference: {fileID: 897249266}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
       propertyPath: explosionRadius
       value: 75
       objectReference: {fileID: 0}
@@ -3219,6 +3236,41 @@ PrefabInstance:
       propertyPath: maxTimeBetweenStrikes
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
+      propertyPath: explosionSounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
+      propertyPath: explosionSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
+      propertyPath: explosionSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: fc96116dc3c141440aabb5605744fea2, type: 3}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
+      propertyPath: explosionSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
+      propertyPath: explosionSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: d4aee29185389894b9cc0d8873904a49, type: 3}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
+      propertyPath: explosionSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: f0bba60dd1813bd40af826dbaa99b983, type: 3}
+    - target: {fileID: 3496563590925190541, guid: 5c48cfc26100849978a397ccfb3b5d2a,
+        type: 3}
+      propertyPath: explosionSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8524588a69a4f3e40bb597b6221138f1, type: 3}
     - target: {fileID: 4041555173368816599, guid: 5c48cfc26100849978a397ccfb3b5d2a,
         type: 3}
       propertyPath: m_LocalPosition.x

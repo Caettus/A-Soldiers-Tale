@@ -10,6 +10,7 @@ public class ArtilleryStrike : MonoBehaviour {
     public float explosionRadius = 5f;
     public CameraShake cameraShake; 
     [SerializeField] private float shakeRadius = 20f;
+    [SerializeField] public AudioClip[] explosionSounds;
 
     void Start() {
         StartCoroutine(ArtilleryStrikeRoutine());
@@ -47,7 +48,9 @@ public class ArtilleryStrike : MonoBehaviour {
         
         // Play explosion sound
         AudioSource audioSource = explosionEffect.GetComponent<AudioSource>();
-        if (audioSource != null) {
+        if (audioSource != null && explosionSounds.Length > 0) 
+        {
+            audioSource.clip = explosionSounds[Random.Range(0, explosionSounds.Length)];
             audioSource.Play();
         }
         

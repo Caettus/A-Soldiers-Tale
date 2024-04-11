@@ -44,6 +44,13 @@ public class ArtilleryStrike : MonoBehaviour {
 
     void TriggerExplosion(Vector3 position) {
         GameObject explosionEffect = Instantiate(explosionPrefab, position, Quaternion.identity);
+        
+        // Play explosion sound
+        AudioSource audioSource = explosionEffect.GetComponent<AudioSource>();
+        if (audioSource != null) {
+            audioSource.Play();
+        }
+        
         Destroy(explosionEffect, 5); 
         
         // Camera shake

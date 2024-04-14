@@ -50,3 +50,12 @@ MonoBehaviour:
   minTimeBetweenStrikes: 0
   maxTimeBetweenStrikes: 1
   explosionRadius: 5
+  cameraShake: {fileID: 0}
+  shakeRadius: 20
+  explosionSounds:
+  - {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
+  - {fileID: 8300000, guid: fc96116dc3c141440aabb5605744fea2, type: 3}
+  - {fileID: 8300000, guid: fd706038486fee041947a774223dc22e, type: 3}
+  - {fileID: 8300000, guid: d4aee29185389894b9cc0d8873904a49, type: 3}
+  - {fileID: 8300000, guid: f0bba60dd1813bd40af826dbaa99b983, type: 3}
+  - {fileID: 8300000, guid: 8524588a69a4f3e40bb597b6221138f1, type: 3}

@@ -1,72 +1,90 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
-    
+    public LayerMask whatIsGround, whatIsPlayer, whatIsFriendly;
+
     // Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
-    
+
     // Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     [SerializeField] EnemyGunScript enemyGun;
-    
+
     // States
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    private Transform target; // Target can be either player or a "Friendly"
 
-    //Awake wordt gecalled wanneer de script wordt geload
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         enemyGun = GetComponentInChildren<EnemyGunScript>();
     }
+
     void Update()
     {
-        // Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        // Find the closest target, either player or Friendly
+        target = FindClosestTarget();
 
-        if (!playerInSightRange && !playerInAttackRange)
-        {
-            Patrolling();
-        }
-        
-        if (playerInSightRange && !playerInAttackRange)
-        {
-            ChasePlayer();
-        }
-        
-        if (playerInSightRange && playerInAttackRange)
-        {
-            AttackPlayer();
-        }
+        // Determine if the target is in sight or attack range
+        bool targetInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer | whatIsFriendly);
+        bool targetInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer | whatIsFriendly);
+
+        if (!targetInSightRange && !targetInAttackRange) Patrolling();
+        if (targetInSightRange && !targetInAttackRange) ChaseTarget();
+        if (targetInSightRange && targetInAttackRange) AttackTarget();
     }
-    
+
+    // Find the closest target that is either a player or a Friendly
+    private Transform FindClosestTarget()
+    {
+        List<GameObject> potentialTargets = new List<GameObject>();
+        potentialTargets.Add(player.gameObject); // Always consider the player
+
+        // Add all "Friendly" objects to potential targets
+        foreach (var friendly in GameObject.FindGameObjectsWithTag("Friendly"))
+        {
+            potentialTargets.Add(friendly);
+        }
+
+        // Determine the closest target
+        Transform closestTarget = null;
+        float closestDistance = float.MaxValue;
+        foreach (var potentialTarget in potentialTargets)
+        {
+            float distance = Vector3.Distance(transform.position, potentialTarget.transform.position);
+            if (distance < closestDistance)
+            {
+                closestTarget = potentialTarget.transform;
+                closestDistance = distance;
+            }
+        }
+
+        return closestTarget;
+    }
+
     private void Patrolling()
     {
         if (!walkPointSet) SearchWalkPoint();
-        
+
         if (walkPointSet)
             agent.SetDestination(walkPoint);
-        
+
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        
+
         // Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
-            // Debug.Log("Walkpoint reached");
     }
-    
+
     private void SearchWalkPoint()
     {
         // Calculate random point in range
@@ -78,35 +96,33 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
-            // Debug.Log("Found a valid walk point at distance: " + Vector3.Distance(transform.position, walkPoint));
         }
         else
         {
             walkPointSet = false;
-            // Debug.Log("Failed to find a valid walk point");
         }
     }
-    
-    private void ChasePlayer()
+
+    private void ChaseTarget()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(target.position);
     }
-    
-    private void AttackPlayer()
+
+    private void AttackTarget()
     {
         agent.SetDestination(transform.position);
-        
-        transform.LookAt(player);
-        
+
+        transform.LookAt(target);
+
         if (!alreadyAttacked)
         {
             enemyGun.Fire();
-            
+
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
-    
+
     private void ResetAttack()
     {
         alreadyAttacked = false;

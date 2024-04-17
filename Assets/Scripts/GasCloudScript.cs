@@ -23,5 +23,15 @@ public class GasCloud : MonoBehaviour
                 Debug.Log(playerHealth.health);
             }
         }
+        else if (other.CompareTag("Friendly"))
+        {
+            Friendly friendlyHealth = other.GetComponent<Friendly>();
+            if (friendlyHealth != null)
+            {
+                
+                friendlyHealth.TakeDamage(damageRate * Time.deltaTime);
+                Debug.Log(friendlyHealth.health);
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class EnemyGunScript : MonoBehaviour
@@ -9,9 +8,13 @@ public class EnemyGunScript : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitEffect;
-    
+
     [SerializeField] float fireRate = 1f;
     private float nextFireTime = 0f;
+
+    [SerializeField] AudioClip gunSound1; // First gun sound
+    [SerializeField] AudioClip gunSound2; // Second gun sound
+    [SerializeField] AudioSource audioSource; // AudioSource component
 
     public void Fire()
     {
@@ -21,6 +24,7 @@ public class EnemyGunScript : MonoBehaviour
             Debug.Log("Enemy fired the gun!");
             ProcessRaycast();
             PlayMuzzleFlash();
+            PlayGunSound(); // Play a gun sound
         }
     }
 
@@ -32,29 +36,40 @@ public class EnemyGunScript : MonoBehaviour
     void ProcessRaycast()
     {
         RaycastHit hit;
-        // Add a random offset to the direction of the raycast
         Vector3 direction = firePoint.forward + new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f));
         if (Physics.Raycast(firePoint.position, direction, out hit, range))
         {
             Debug.Log(hit.transform.name);
-            // CreateHitImpact(hit);
-            PlayerHealth playerHealth = hit.transform.GetComponent<PlayerHealth>();
 
-            if (hit.transform.CompareTag("PlayerBody") || hit.transform.CompareTag("Player"))
+            PlayerHealth playerHealth = hit.transform.GetComponent<PlayerHealth>();
+            Friendly friendlyHealth = hit.transform.GetComponent<Friendly>();
+
+            if (hit.transform.CompareTag("PlayerBody") || hit.transform.CompareTag("Player") || hit.transform.CompareTag("Friendly"))
             {
-                Debug.Log("Hit player!");
+                Debug.Log("Hit someone!");
             }
 
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
-                Debug.Log("Took damage off player!");
+                Debug.Log("Took damage off player HAHAHA!");
+            }
+            if (friendlyHealth != null)
+            {
+                friendlyHealth.TakeDamage(damage);
+                Debug.Log("Took damage off someone!");
             }
         }
         else
         {
-            Debug.Log("Missed player!");
+            Debug.Log("Missed someone!");
         }
+    }
+
+    private void PlayGunSound()
+    {
+        AudioClip clipToPlay = UnityEngine.Random.value > 0.5f ? gunSound1 : gunSound2;
+        audioSource.PlayOneShot(clipToPlay);
     }
 
     private void CreateHitImpact(RaycastHit hit)

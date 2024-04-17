@@ -77,6 +77,16 @@ public class ArtilleryStrike : MonoBehaviour {
                     Debug.Log(playerHealth.health);
                 }
             }
+            else if (hitCollider.CompareTag("Friendly"))
+            {
+                Friendly friendly = hitCollider.GetComponent<Friendly>();
+                if (friendly != null)
+                {
+                    friendly.TakeDamage(75); 
+                    Debug.Log("Friendly hit by artillery strike!");
+                    Debug.Log(friendly.health);
+                }
+            }
         }
     }
 }

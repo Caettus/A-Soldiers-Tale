@@ -7,9 +7,15 @@ public class FriendlyGunScript : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private GameObject hitEffect;
-    
+
     [SerializeField] private float fireRate = 1f;
     private float nextFireTime = 0f;
+
+    // Add references to two audio clips for firing the gun
+    [SerializeField] private AudioClip fireSound1;
+    [SerializeField] private AudioClip fireSound2;
+    // Add a reference to an AudioSource component
+    [SerializeField] private AudioSource audioSource;
 
     public void Fire()
     {
@@ -19,6 +25,7 @@ public class FriendlyGunScript : MonoBehaviour
             Debug.Log("Friendly unit fired the gun!");
             ProcessRaycast();
             PlayMuzzleFlash();
+            PlayFireSound();
         }
     }
 
@@ -27,7 +34,7 @@ public class FriendlyGunScript : MonoBehaviour
         muzzleFlash.Play();
     }
 
-    void ProcessRaycast()
+    private void ProcessRaycast()
     {
         RaycastHit hit;
         // Add a random offset to the direction of the raycast for a more realistic aiming error
@@ -37,7 +44,6 @@ public class FriendlyGunScript : MonoBehaviour
             Debug.Log(hit.transform.name);
             Enemy enemyHealth = hit.transform.GetComponent<Enemy>();
 
-            // Assuming enemies have a specific tag, such as "Enemy"
             if (hit.transform.CompareTag("Enemy"))
             {
                 Debug.Log("Hit enemy!");
@@ -48,7 +54,6 @@ public class FriendlyGunScript : MonoBehaviour
                 }
             }
 
-            // Optionally, create a visual effect for the hit
             CreateHitImpact(hit);
         }
         else
@@ -61,5 +66,20 @@ public class FriendlyGunScript : MonoBehaviour
     {
         GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(impact, 1);
+    }
+
+    // Method to play one of the two fire sounds
+    private void PlayFireSound()
+    {
+        if (audioSource != null)
+        {
+            // Randomly choose one of the two sounds
+            AudioClip chosenClip = (Random.Range(0, 2) == 0) ? fireSound1 : fireSound2;
+            audioSource.PlayOneShot(chosenClip);
+        }
+        else
+        {
+            Debug.LogError("AudioSource is not assigned on " + gameObject.name);
+        }
     }
 }

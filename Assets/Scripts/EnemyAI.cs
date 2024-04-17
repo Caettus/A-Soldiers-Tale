@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour
         // Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
-            Debug.Log("Walkpoint reached");
+            // Debug.Log("Walkpoint reached");
     }
     
     private void SearchWalkPoint()
@@ -78,12 +78,12 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
-            Debug.Log("Found a valid walk point at distance: " + Vector3.Distance(transform.position, walkPoint));
+            // Debug.Log("Found a valid walk point at distance: " + Vector3.Distance(transform.position, walkPoint));
         }
         else
         {
             walkPointSet = false;
-            Debug.Log("Failed to find a valid walk point");
+            // Debug.Log("Failed to find a valid walk point");
         }
     }
     

@@ -1,105 +1,100 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class FriendlyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
-    public Transform enemyTrench; // Target enemy trench location
+    private Transform targetEnemy;
     public LayerMask whatIsGround, whatIsEnemy;
-    
+
+    // Ranges
+    public float seeingRange = 100f; // Distance at which enemies can be detected
+    public float attackRange = 10f; // Distance within which the AI can attack
+
     // Attacking
-    public float timeBetweenAttacks;
     private bool alreadyAttacked;
     [SerializeField] private FriendlyGunScript friendlyGun;
-    
-    // States
-    public float sightRange, attackRange;
-    private bool enemyInSightRange, enemyInAttackRange;
+    public float timeBetweenAttacks;
 
     private void Awake()
     {
-        enemyTrench = GameObject.Find("EnemyTrench").transform;
         agent = GetComponent<NavMeshAgent>();
         friendlyGun = GetComponentInChildren<FriendlyGunScript>();
     }
 
-    void Update()
+    private void Update()
     {
-        // Check for sight and attack range
-        enemyInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsEnemy);
-        enemyInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsEnemy);
+        // Check if any enemy is within seeing range
+        bool enemyInSeeingRange = Physics.CheckSphere(transform.position, seeingRange, whatIsEnemy);
+        bool enemyInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsEnemy);
 
-        if (!enemyInSightRange && !enemyInAttackRange)
+        if (enemyInSeeingRange && !enemyInAttackRange)
         {
-            MoveToEnemyTrench();
+            // Move towards the target enemy
+            MoveTowardsTarget();
         }
-        
-        if (enemyInSightRange && !enemyInAttackRange)
+
+        if (enemyInAttackRange)
         {
-            ChaseEnemy();
-        }
-        
-        if (enemyInSightRange && enemyInAttackRange)
-        {
+            // Engage the enemy
             AttackEnemy();
         }
+
+        // If no enemy is within seeing range, consider patrolling or holding position
     }
 
-    private void MoveToEnemyTrench()
+    private void MoveTowardsTarget()
     {
-        agent.SetDestination(enemyTrench.position);
+        FindClosestEnemy(); // Update targetEnemy to the closest enemy
+        if (targetEnemy != null)
+        {
+            agent.SetDestination(targetEnemy.position);
+        }
     }
-    
-    private void ChaseEnemy()
-    {
-        MoveToEnemyTrench();
-    }
-    
+
     private void AttackEnemy()
     {
-        Transform closestEnemy = FindClosestEnemy();
-        if (closestEnemy != null)
+        // Stop moving to attack
+        agent.SetDestination(transform.position);
+
+        if (!alreadyAttacked)
         {
-            // Stop the agent
-            agent.SetDestination(transform.position);
-            
-            // Rotate towards the closest enemy
-            Vector3 direction = (closestEnemy.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-            
-            if (!alreadyAttacked)
-            {
-                friendlyGun.Fire();
-                alreadyAttacked = true;
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            }
+            // Attack logic here
+            friendlyGun.Fire();
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
-    }
-    
-    private Transform FindClosestEnemy()
-    {
-        Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, attackRange, whatIsEnemy);
-        Transform closestEnemy = null;
-        float shortestDistance = Mathf.Infinity;
-        
-        foreach (Collider enemy in enemiesInRange)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
-            {
-                shortestDistance = distanceToEnemy;
-                closestEnemy = enemy.transform;
-            }
-        }
-        
-        return closestEnemy;
     }
 
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    private void FindClosestEnemy()
+    {
+        float closestDistance = Mathf.Infinity;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closestEnemy = null;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < closestDistance)
+            {
+                closestDistance = distanceToEnemy;
+                closestEnemy = enemy;
+            }
+        }
+
+        if (closestEnemy != null)
+        {
+            targetEnemy = closestEnemy.transform;
+        }
+        else
+        {
+            targetEnemy = null;
+        }
     }
 }

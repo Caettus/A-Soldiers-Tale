@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - FxTemporaire
   - EnemyTrench
+  - Friendly
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Obstacle
   - 
   - 
   - 

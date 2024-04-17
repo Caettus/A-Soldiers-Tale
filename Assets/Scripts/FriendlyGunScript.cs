@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FriendlyGunScript : MonoBehaviour
 {
-    [SerializeField] private float range = 100f;
+    [SerializeField] public float range = 100f;
     [SerializeField] private float damage = 25f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private ParticleSystem muzzleFlash;

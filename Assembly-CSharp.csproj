@@ -69,6 +69,7 @@
     <Compile Include="Assets\MapDesignAssest\Fillefranz\Tools\Tools\DataTypes.cs" />
     <Compile Include="Assets\Scripts\GasAttackManager.cs" />
     <Compile Include="Assets\Objective System\Scripts\Objective System\Objective.cs" />
+    <Compile Include="Assets\Scripts\WhistleSoundScript.cs" />
     <Compile Include="Assets\Scripts\Grenade.cs" />
     <Compile Include="Assets\Scripts\GunScript.cs" />
     <Compile Include="Assets\Scripts\FriendlyGunScript.cs" />

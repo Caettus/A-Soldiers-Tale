@@ -121,7 +121,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1698827188406736506}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -130,7 +130,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.5
+  m_Height: 1.5
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -153,8 +153,9 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  seeingRange: 10000
+  seeingRange: 999999
   attackRange: 12
+  ladderDetectionRange: 999999
   friendlyGun: {fileID: 4081297644136162047}
   timeBetweenAttacks: 0
 --- !u!114 &5052757413304079416

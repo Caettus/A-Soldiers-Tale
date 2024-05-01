@@ -8,68 +8,70 @@ public class FriendlyAI : MonoBehaviour
     public LayerMask whatIsGround, whatIsEnemy;
 
     // Ranges
-    public float seeingRange = 100f; // Distance at which enemies can be detected
-    public float attackRange = 10f; // Distance within which the AI can attack
+    public float seeingRange = 100f;
+    public float attackRange = 10f;
+    public float ladderDetectionRange = 5f; // Adjusted for more accurate proximity
 
     // Attacking
     private bool alreadyAttacked;
     [SerializeField] private FriendlyGunScript friendlyGun;
     public float timeBetweenAttacks;
 
+    private Transform nearestLadder; // Store the nearest ladder for use
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         friendlyGun = GetComponentInChildren<FriendlyGunScript>();
+        Debug.Log($"{gameObject.name}: Friendly AI Initialized");
     }
 
     private void Update()
     {
-        // Check if any enemy is within seeing range
+        Debug.Log($"{gameObject.name}: Update tick at position {transform.position}");
+        nearestLadder = FindNearestLadder();
+        if (nearestLadder != null)
+        {
+            Debug.Log($"{gameObject.name}: Ladder found at {nearestLadder.position}, attempting to move to ladder.");
+            MoveToLadder(nearestLadder);
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name}: No ladder found within range.");
+            CheckAndEngageEnemy();
+        }
+
+        // Check if the agent is on an Off-Mesh Link and trying to traverse it
+        if (agent.isOnOffMeshLink)
+        {
+            Debug.Log($"{gameObject.name}: Agent on Off-Mesh Link, attempting to traverse.");
+            agent.CompleteOffMeshLink();
+        }
+    }
+
+    private void CheckAndEngageEnemy()
+    {
         bool enemyInSeeingRange = Physics.CheckSphere(transform.position, seeingRange, whatIsEnemy);
         bool enemyInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsEnemy);
 
         if (enemyInSeeingRange && !enemyInAttackRange)
         {
-            // Move towards the target enemy
             MoveTowardsTarget();
         }
-
-        if (enemyInAttackRange)
+        else if (enemyInAttackRange)
         {
-            // Engage the enemy
             AttackEnemy();
         }
-
-        // If no enemy is within seeing range, consider patrolling or holding position
     }
 
     private void MoveTowardsTarget()
     {
-        FindClosestEnemy(); // Update targetEnemy to the closest enemy
+        FindClosestEnemy();
         if (targetEnemy != null)
         {
+            Debug.Log($"{gameObject.name}: Enemy detected at {targetEnemy.position}, moving towards.");
             agent.SetDestination(targetEnemy.position);
         }
-    }
-
-    private void AttackEnemy()
-    {
-        // Stop moving to attack
-        agent.SetDestination(transform.position);
-
-        if (!alreadyAttacked)
-        {
-            // Attack logic here
-            friendlyGun.Fire();
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
     }
 
     private void FindClosestEnemy()
@@ -91,10 +93,63 @@ public class FriendlyAI : MonoBehaviour
         if (closestEnemy != null)
         {
             targetEnemy = closestEnemy.transform;
+            Debug.Log($"{gameObject.name}: Closest enemy found at {targetEnemy.position}");
         }
         else
         {
             targetEnemy = null;
+            Debug.Log($"{gameObject.name}: No enemies found.");
         }
+    }
+
+    private void AttackEnemy()
+    {
+        if (!alreadyAttacked && targetEnemy != null)
+        {
+            Debug.Log($"{gameObject.name}: Attacking enemy at {targetEnemy.position}");
+            // Your attack logic
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+        Debug.Log($"{gameObject.name}: Ready to attack again.");
+    }
+
+    private Transform FindNearestLadder()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, ladderDetectionRange);
+        Transform nearestLadder = null;
+        float nearestDistance = Mathf.Infinity;
+
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Ladder"))
+            {
+                float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestLadder = hitCollider.transform;
+                    Debug.Log($"{gameObject.name}: Nearest ladder detected at {nearestLadder.position} with distance {distance}");
+                }
+            }
+        }
+
+        if (nearestLadder == null)
+        {
+            Debug.Log($"{gameObject.name}: No ladder detected within detection range.");
+        }
+
+        return nearestLadder;
+    }
+
+    private void MoveToLadder(Transform ladder)
+    {
+        Debug.Log($"{gameObject.name}: Moving to ladder at {ladder.position}");
+        agent.SetDestination(ladder.position);
     }
 }

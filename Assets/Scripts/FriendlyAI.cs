@@ -10,7 +10,7 @@ public class FriendlyAI : MonoBehaviour
     // Ranges
     public float seeingRange = 100f;
     public float attackRange = 10f;
-    public float ladderDetectionRange = 5f; // Adjusted for more accurate proximity
+    public float ladderDetectionRange = 100f;
 
     // Attacking
     private bool alreadyAttacked;
@@ -28,39 +28,54 @@ public class FriendlyAI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"{gameObject.name}: Update tick at position {transform.position}");
         nearestLadder = FindNearestLadder();
+
         if (nearestLadder != null)
         {
-            Debug.Log($"{gameObject.name}: Ladder found at {nearestLadder.position}, attempting to move to ladder.");
+            Debug.Log($"{gameObject.name}: Ladder detected at {nearestLadder.position}, moving to ladder.");
             MoveToLadder(nearestLadder);
         }
         else
         {
-            Debug.Log($"{gameObject.name}: No ladder found within range.");
-            CheckAndEngageEnemy();
+            bool enemyInSeeingRange = Physics.CheckSphere(transform.position, seeingRange, whatIsEnemy);
+            bool enemyInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsEnemy);
+
+            if (enemyInSeeingRange && !enemyInAttackRange)
+            {
+                Debug.Log($"{gameObject.name}: Enemy detected in seeing range, moving towards the enemy.");
+                MoveTowardsTarget();
+            }
+            else if (enemyInAttackRange)
+            {
+                Debug.Log($"{gameObject.name}: Enemy detected in attack range, engaging.");
+                AttackEnemy();
+            }
+            else
+            {
+                Debug.Log($"{gameObject.name}: No ladder or enemy in range.");
+            }
         }
 
-        // Check if the agent is on an Off-Mesh Link and trying to traverse it
+        // Check if the agent is on an off-mesh link
         if (agent.isOnOffMeshLink)
         {
-            Debug.Log($"{gameObject.name}: Agent on Off-Mesh Link, attempting to traverse.");
+            Debug.Log($"{gameObject.name}: Agent on Off-Mesh Link.");
+            agent.ActivateCurrentOffMeshLink(true);
             agent.CompleteOffMeshLink();
         }
-    }
-
-    private void CheckAndEngageEnemy()
-    {
-        bool enemyInSeeingRange = Physics.CheckSphere(transform.position, seeingRange, whatIsEnemy);
-        bool enemyInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsEnemy);
-
-        if (enemyInSeeingRange && !enemyInAttackRange)
+        else
         {
-            MoveTowardsTarget();
+            Debug.Log($"{gameObject.name}: Agent not on Off-Mesh Link.");
         }
-        else if (enemyInAttackRange)
+
+        // Debugging the path status
+        if (agent.hasPath)
         {
-            AttackEnemy();
+            Debug.Log($"{gameObject.name}: Has path to destination.");
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name}: No path to destination.");
         }
     }
 
@@ -69,9 +84,32 @@ public class FriendlyAI : MonoBehaviour
         FindClosestEnemy();
         if (targetEnemy != null)
         {
-            Debug.Log($"{gameObject.name}: Enemy detected at {targetEnemy.position}, moving towards.");
+            Debug.Log($"{gameObject.name}: Moving towards enemy at {targetEnemy.position}");
             agent.SetDestination(targetEnemy.position);
         }
+        else
+        {
+            Debug.Log($"{gameObject.name}: No enemies found.");
+        }
+    }
+
+    private void AttackEnemy()
+    {
+        agent.SetDestination(transform.position);
+
+        if (!alreadyAttacked && targetEnemy != null)
+        {
+            Debug.Log($"{gameObject.name}: Attacking enemy at {targetEnemy.position}");
+            friendlyGun.Fire();
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+        Debug.Log($"{gameObject.name}: Ready to attack again.");
     }
 
     private void FindClosestEnemy()
@@ -102,46 +140,35 @@ public class FriendlyAI : MonoBehaviour
         }
     }
 
-    private void AttackEnemy()
-    {
-        if (!alreadyAttacked && targetEnemy != null)
-        {
-            Debug.Log($"{gameObject.name}: Attacking enemy at {targetEnemy.position}");
-            // Your attack logic
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-        Debug.Log($"{gameObject.name}: Ready to attack again.");
-    }
-
     private Transform FindNearestLadder()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, ladderDetectionRange);
         Transform nearestLadder = null;
-        float nearestDistance = Mathf.Infinity;
+        float nearestDistance = float.MaxValue;
 
         foreach (var hitCollider in hitColliders)
         {
+            Debug.Log($"{gameObject.name}: Checking collider {hitCollider.gameObject.name}");
+
             if (hitCollider.CompareTag("Ladder"))
             {
                 float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                Debug.Log($"{gameObject.name}: Ladder detected at distance {distance}");
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;
                     nearestLadder = hitCollider.transform;
-                    Debug.Log($"{gameObject.name}: Nearest ladder detected at {nearestLadder.position} with distance {distance}");
                 }
             }
         }
 
-        if (nearestLadder == null)
+        if (nearestLadder != null)
         {
-            Debug.Log($"{gameObject.name}: No ladder detected within detection range.");
+            Debug.Log($"{gameObject.name}: Nearest ladder found at {nearestLadder.position}");
+        }
+        else
+        {
+            Debug.Log($"{gameObject.name}: No ladders found within detection range.");
         }
 
         return nearestLadder;

@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c8b48-7947-4fed-adb5-0d7a8d23dad1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.A Soldiers Tale/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Friendly.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Friendly.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-Navmesh.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene/NavMesh-Navmesh.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/FriendlyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FriendlyAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/medieval chest/Materials/alb.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/medieval chest/Materials/alb.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/medieval chest/Materials/base.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/medieval chest/Materials/base.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ArtifactDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/ArtifactDB-lock" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ArtifactDB-lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +110,7 @@
       <workItem from="1711367805644" duration="2603000" />
       <workItem from="1711444794894" duration="12273000" />
       <workItem from="1712565428184" duration="6908000" />
-      <workItem from="1714588918688" duration="5491000" />
+      <workItem from="1714588918688" duration="6399000" />
     </task>
     <servers />
   </component>
